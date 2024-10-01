@@ -1,3 +1,5 @@
+import java.util.Random;
+import java.util.Scanner;
 
 class MainRunner{
 
@@ -25,6 +27,46 @@ class MainRunner{
 		board[95] = 73; // Snake from 95 to 73
 		board[99] = 78; // Snake from 99 to 78
 	}
+    public static void main(String[] args) {
+      
+    }
+
+    private static void playerTurn(int playerNumber, Scanner scanner, Random random) {
+        int position = playerNumber == 1 ? player1Position : player2Position;
+
+        System.out.println("Player " + playerNumber + "'s turn. Press Enter to roll the dice.");
+        scanner.nextLine();
+        int diceRoll = rollDice(random);
+        System.out.println("Player " + playerNumber + " rolled a " + diceRoll);
+
+        if (position == 0 && diceRoll == 6) {
+            // Player starts from 0 only if they rolled a 6
+            position += diceRoll;
+            System.out.println("Player " + playerNumber + " can start moving!");
+        } else if (position > 0) {
+            position += diceRoll;
+        }
+
+        position = moveThroughSnakesAndLadders(position);
+        System.out.println("Player " + playerNumber + "'s new position: " + position);
+
+        if (playerNumber == 1) {
+            player1Position = position;
+        } else {
+            player2Position = position;
+        }
+    }
+
+    private static int rollDice(Random random) {
+        return random.nextInt(6) + 1; // Roll a number between 1 and 6
+    }
+
+    private static int moveThroughSnakesAndLadders(int position) {
+        if (position > WINNING_POSITION) {
+            return position; // Ignore overshoot
+        }
+        return board[position] == 0 ? position : board[position]; // Move to new position if there's a snake or ladder
+    }
 
 	
 
