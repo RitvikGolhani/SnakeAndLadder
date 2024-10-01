@@ -28,8 +28,30 @@ class MainRunner{
 		board[99] = 78; // Snake from 99 to 78
 	}
     public static void main(String[] args) {
-      
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        while (player1Position < WINNING_POSITION && player2Position < WINNING_POSITION) {
+            // Player 1's turn
+            playerTurn(1, scanner, random);
+
+            if (player1Position >= WINNING_POSITION) {
+                System.out.println("Player 1 wins!");
+                break;
+            }
+
+            // Player 2's turn
+            playerTurn(2, scanner, random);
+
+            if (player2Position >= WINNING_POSITION) {
+                System.out.println("Player 2 wins!");
+                break;
+            }
+        }
+
+        scanner.close();
     }
+
 
     private static void playerTurn(int playerNumber, Scanner scanner, Random random) {
         int position = playerNumber == 1 ? player1Position : player2Position;
