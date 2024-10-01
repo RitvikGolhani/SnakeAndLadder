@@ -1,9 +1,6 @@
 
 class MainRunner{
 
-
-
-
 	static final int WINNING_POSITION = 100;
 	static int[] board = new int[101]; // board[0] is unused for simplicity
 	static int player1Position = 0;
@@ -28,5 +25,7 @@ class MainRunner{
 		board[95] = 73; // Snake from 95 to 73
 		board[99] = 78; // Snake from 99 to 78
 	}
+
+	
 
 }
